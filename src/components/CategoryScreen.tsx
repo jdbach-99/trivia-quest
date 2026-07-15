@@ -8,12 +8,20 @@ import BackButton from "./BackButton";
 interface Props {
   categories: string[];
   categoryTotals: Record<string, number>;
+  subcategoriesByCategory: Record<string, string[]>;
   progress: PlayerProgress;
   onPick: (category: string) => void;
   onBack: () => void;
 }
 
-export default function CategoryScreen({ categories, categoryTotals, progress, onPick, onBack }: Props) {
+export default function CategoryScreen({
+  categories,
+  categoryTotals,
+  subcategoriesByCategory,
+  progress,
+  onPick,
+  onBack,
+}: Props) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
@@ -36,6 +44,7 @@ export default function CategoryScreen({ categories, categoryTotals, progress, o
           const tier = masteryTier(answered, correct);
           const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : null;
           const count = categoryTotals[category] ?? 0;
+          const subcategories = subcategoriesByCategory[category] ?? [];
           return (
             <li key={category}>
               <button
@@ -49,6 +58,11 @@ export default function CategoryScreen({ categories, categoryTotals, progress, o
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-lg font-bold text-slate-900">{category}</span>
+                  {subcategories.length > 0 && (
+                    <span className="block truncate text-sm font-semibold text-slate-600">
+                      {subcategories.join(" · ")}
+                    </span>
+                  )}
                   <span className="block text-xs font-medium text-slate-500">
                     {count} questions
                     {accuracy !== null && ` · ${accuracy}% accuracy`}

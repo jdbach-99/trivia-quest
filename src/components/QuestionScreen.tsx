@@ -187,8 +187,9 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
         >
           <span aria-hidden="true">✕</span>
         </button>
-        <span className={`rounded-full px-3 py-1 text-xs font-bold ${style.chip}`}>
+        <span className={`min-w-0 truncate rounded-full px-3 py-1 text-xs font-bold ${style.chip}`}>
           {style.emoji} {question.category}
+          {question.subcategory && ` · ${question.subcategory}`}
         </span>
         <span className="text-sm font-bold text-slate-600">
           {round.currentQuestionIndex + 1} / {total}

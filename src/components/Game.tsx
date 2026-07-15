@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { GameMode, PlayerProgress, RoundState, Screen, Settings } from "@/types/game";
-import { categories, categoryTotals, questions } from "@/lib/questions";
+import { categories, categoryTotals, questions, subcategoriesByCategory } from "@/lib/questions";
 import { selectQuestions } from "@/lib/questionSelector";
 import { applyRoundResults, type RoundOutcome } from "@/lib/rounds";
 import { isDailyBonusAvailable, localDateString } from "@/lib/progression";
@@ -141,6 +141,7 @@ export default function Game() {
         <CategoryScreen
           categories={categories}
           categoryTotals={categoryTotals}
+          subcategoriesByCategory={subcategoriesByCategory}
           progress={progress}
           onPick={(category) => startRound({ mode: "category", category })}
           onBack={() => navigate("home")}

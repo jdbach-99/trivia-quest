@@ -18,3 +18,11 @@ export const questionWarnings = result.warnings;
 export const categoryTotals = result.categoryTotals;
 /** Category names in data order, deduplicated. */
 export const categories = [...new Set(questions.map((q) => q.category))];
+
+/** Subcategory names per category, in data order, deduplicated. */
+export const subcategoriesByCategory: Record<string, string[]> = {};
+for (const q of questions) {
+  if (!q.subcategory) continue;
+  const list = (subcategoriesByCategory[q.category] ??= []);
+  if (!list.includes(q.subcategory)) list.push(q.subcategory);
+}
