@@ -10,7 +10,7 @@ interface Props {
   categoryTotals: Record<string, number>;
   subcategoriesByCategory: Record<string, string[]>;
   progress: PlayerProgress;
-  onPick: (category: string) => void;
+  onPick: (category: string, subcategory?: string) => void;
   onBack: () => void;
 }
 
@@ -46,23 +46,22 @@ export default function CategoryScreen({
           const count = categoryTotals[category] ?? 0;
           const subcategories = subcategoriesByCategory[category] ?? [];
           return (
-            <li key={category}>
+            <li
+              key={category}
+              className={`rounded-2xl border-2 bg-white p-3 shadow-sm ${style.button}`}
+            >
               <button
                 type="button"
                 onClick={() => onPick(category)}
                 disabled={count === 0}
-                className={`flex w-full items-center gap-3 rounded-2xl border-2 bg-white p-4 text-left shadow-sm transition active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300 disabled:opacity-50 ${style.button}`}
+                aria-label={`Play all ${category}`}
+                className="flex w-full items-center gap-3 rounded-xl text-left transition active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300 disabled:opacity-50"
               >
                 <span aria-hidden="true" className="text-3xl">
                   {style.emoji}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-lg font-bold text-slate-900">{category}</span>
-                  {subcategories.length > 0 && (
-                    <span className="block truncate text-sm font-semibold text-slate-600">
-                      {subcategories.join(" · ")}
-                    </span>
-                  )}
                   <span className="block text-xs font-medium text-slate-500">
                     {count} questions
                     {accuracy !== null && ` · ${accuracy}% accuracy`}
@@ -75,6 +74,21 @@ export default function CategoryScreen({
                   {MASTERY_BADGES[tier]} {tier}
                 </span>
               </button>
+              {subcategories.length > 0 && (
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {subcategories.map((subcategory) => (
+                    <button
+                      key={subcategory}
+                      type="button"
+                      onClick={() => onPick(category, subcategory)}
+                      aria-label={`Play ${subcategory}`}
+                      className={`min-h-[38px] rounded-full px-3.5 py-1.5 text-sm font-bold transition hover:brightness-95 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300 ${style.chip}`}
+                    >
+                      {subcategory}
+                    </button>
+                  ))}
+                </div>
+              )}
             </li>
           );
         })}

@@ -28,9 +28,10 @@ npm start         # serve the production build
 ## How the game works
 
 - **Quick Play** — a 10-question round mixing all categories evenly.
-- **Category Play** — 10 questions from one category.
-- Correct answers earn **100 points** plus a speed bonus (**remaining seconds × 5**) when the timer is on. Consecutive correct answers build a streak multiplier up to **2.0×**.
-- Each round awards **stars** (1–3 for accuracy, +1 for a perfect 10/10) which unlock trophies on the Trophy Shelf. The first round of each day earns **+2 bonus stars**.
+- **Category Play** — 10 questions from one category, or tap a subcategory pill (e.g. just Harry Potter) for a focused round.
+- Rounds are ordered **easy → hard** so every round starts with confidence.
+- Correct answers earn **100 points** plus a speed bonus (**remaining seconds × 5**) when the timer is on. Streaks multiply points: **3 in a row = 1.5×, 7 in a row = 2×**.
+- Each round awards **stars** (1–3 for accuracy, +1 for a perfect 10/10) which unlock trophies on the Trophy Shelf (costs 3–30 stars). The first round of each day earns **+2 bonus stars**.
 - Correct answers earn **10 XP** each (+25 for a perfect round); levels require `100 + (level − 1) × 25` XP.
 
 ## Questions

@@ -14,13 +14,14 @@ function mulberry32(seed: number) {
   };
 }
 
-function makeQuestion(id: string, category: string): Question {
+function makeQuestion(id: string, category: string, extra: Partial<Question> = {}): Question {
   return {
     id,
     category,
     question: `Question ${id}?`,
     answers: ["A", "B", "C", "D"],
     correctAnswer: "A",
+    ...extra,
   };
 }
 
@@ -104,6 +105,37 @@ describe("selectQuestions", () => {
       random: mulberry32(5),
     });
     expect(picked).toHaveLength(10);
+  });
+
+  it("narrows a category round to one subcategory", () => {
+    const pool = [
+      ...Array.from({ length: 15 }, (_, i) =>
+        makeQuestion(`hp-${i}`, "Books", { subcategory: "Harry Potter" })
+      ),
+      ...Array.from({ length: 15 }, (_, i) =>
+        makeQuestion(`dm-${i}`, "Books", { subcategory: "Dog Man" })
+      ),
+    ];
+    const picked = selectQuestions(pool, {
+      mode: "category",
+      category: "Books",
+      subcategory: "Dog Man",
+      random: mulberry32(8),
+    });
+    expect(picked).toHaveLength(10);
+    expect(picked.every((q) => q.subcategory === "Dog Man")).toBe(true);
+  });
+
+  it("orders rounds easy to hard", () => {
+    const difficulties = ["hard", "easy", "medium", "hard", "easy", "medium", "easy", "hard", "medium", "easy"];
+    const pool = difficulties.map((difficulty, i) =>
+      makeQuestion(`q-${i}`, "A", { difficulty })
+    );
+    const picked = selectQuestions(pool, { mode: "category", category: "A", random: mulberry32(13) });
+    const rank = (d?: string) => (d === "easy" ? 0 : d === "hard" ? 2 : 1);
+    for (let i = 1; i < picked.length; i++) {
+      expect(rank(picked[i].difficulty)).toBeGreaterThanOrEqual(rank(picked[i - 1].difficulty));
+    }
   });
 
   it("shuffles answers but keeps the same four choices", () => {

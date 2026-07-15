@@ -22,6 +22,7 @@ import Modal from "./Modal";
 interface RoundConfig {
   mode: GameMode;
   category?: string;
+  subcategory?: string;
 }
 
 export default function Game() {
@@ -61,6 +62,7 @@ export default function Game() {
     const picked = selectQuestions(questions, {
       mode: config.mode,
       category: config.category,
+      subcategory: config.subcategory,
       recentIds: progress.recentQuestionIds,
     });
     if (picked.length === 0) {
@@ -74,6 +76,7 @@ export default function Game() {
     setRound({
       mode: config.mode,
       category: config.category,
+      subcategory: config.subcategory,
       questions: picked,
       currentQuestionIndex: 0,
       score: 0,
@@ -154,7 +157,7 @@ export default function Game() {
           categoryTotals={categoryTotals}
           subcategoriesByCategory={subcategoriesByCategory}
           progress={progress}
-          onPick={(category) => startRound({ mode: "category", category })}
+          onPick={(category, subcategory) => startRound({ mode: "category", category, subcategory })}
           onBack={() => navigate("home")}
         />
       )}

@@ -1,12 +1,10 @@
 export const BASE_SCORE = 100;
 export const SPEED_BONUS_PER_SECOND = 5;
 
+/** Kid-legible brackets: 3 in a row = 1.5x, 7 in a row = 2x. */
 export function streakMultiplier(streak: number): number {
-  if (streak >= 10) return 2.0;
-  if (streak >= 8) return 1.75;
-  if (streak >= 6) return 1.5;
-  if (streak >= 4) return 1.25;
-  if (streak >= 2) return 1.1;
+  if (streak >= 7) return 2.0;
+  if (streak >= 3) return 1.5;
   return 1.0;
 }
 

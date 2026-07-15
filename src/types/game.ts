@@ -25,6 +25,7 @@ export interface RoundAnswer {
 export interface RoundState {
   mode: GameMode;
   category?: string;
+  subcategory?: string;
   questions: Question[];
   currentQuestionIndex: number;
   score: number;

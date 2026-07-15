@@ -16,10 +16,19 @@ export function shuffle<T>(items: readonly T[], random: Random = Math.random): T
 export interface SelectOptions {
   mode: GameMode;
   category?: string;
+  /** Narrow a category round to one subcategory. */
+  subcategory?: string;
   roundSize?: number;
   /** Question ids shown recently; avoided unless the pool is too small. */
   recentIds?: readonly string[];
   random?: Random;
+}
+
+/** Easy questions first so every round starts with confidence. */
+function difficultyRank(q: Question): number {
+  if (q.difficulty === "easy") return 0;
+  if (q.difficulty === "hard") return 2;
+  return 1;
 }
 
 /** Shuffled copy of the list with not-recently-seen questions first. */
@@ -30,14 +39,27 @@ function orderPreferringFresh(list: Question[], recent: Set<string>, random: Ran
 }
 
 /**
- * Picks up to roundSize unique questions for a round, shuffles their order,
- * and shuffles each question's answer choices. In mixed mode questions are
- * spread across categories as evenly as the pool allows.
+ * Picks up to roundSize unique questions for a round, orders them easy to
+ * hard (shuffled within a difficulty), and shuffles each question's answer
+ * choices. In mixed mode questions are spread across categories as evenly
+ * as the pool allows.
  */
 export function selectQuestions(pool: Question[], options: SelectOptions): Question[] {
-  const { mode, category, roundSize = ROUND_SIZE, recentIds = [], random = Math.random } = options;
+  const {
+    mode,
+    category,
+    subcategory,
+    roundSize = ROUND_SIZE,
+    recentIds = [],
+    random = Math.random,
+  } = options;
   const recent = new Set(recentIds);
-  const available = mode === "category" ? pool.filter((q) => q.category === category) : pool;
+  const available =
+    mode === "category"
+      ? pool.filter(
+          (q) => q.category === category && (!subcategory || q.subcategory === subcategory)
+        )
+      : pool;
   const target = Math.min(roundSize, available.length);
 
   let picked: Question[];
@@ -69,5 +91,7 @@ export function selectQuestions(pool: Question[], options: SelectOptions): Quest
     }
   }
 
-  return shuffle(picked, random).map((q) => ({ ...q, answers: shuffle(q.answers, random) }));
+  // Shuffle first for randomness, then stable-sort so ties stay shuffled.
+  const ordered = shuffle(picked, random).sort((a, b) => difficultyRank(a) - difficultyRank(b));
+  return ordered.map((q) => ({ ...q, answers: shuffle(q.answers, random) }));
 }
