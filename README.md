@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trivia Quest
 
-## Getting Started
+A mobile-first trivia game for kids (around age 10). Answer 10-question rounds, build streaks, earn stars, and spend them on a shelf of collectible trophies. Everything runs in the browser — no backend, no accounts, no tracking.
 
-First, run the development server:
+Built with Next.js, React, TypeScript, and Tailwind CSS. Progress is stored locally in the browser via `localStorage`.
+
+## Requirements
+
+- Node.js 20 or newer
+- npm
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install       # install dependencies
+npm run dev       # start the dev server at http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Other commands:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint      # ESLint
+npm test          # unit tests for the game logic (vitest)
+npm run build     # production build
+npm start         # serve the production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How the game works
 
-## Learn More
+- **Quick Play** — a 10-question round mixing all categories evenly.
+- **Category Play** — 10 questions from one category.
+- Correct answers earn **100 points** plus a speed bonus (**remaining seconds × 5**) when the timer is on. Consecutive correct answers build a streak multiplier up to **2.0×**.
+- Each round awards **stars** (1–3 for accuracy, +1 for a perfect 10/10) which unlock trophies on the Trophy Shelf. The first round of each day earns **+2 bonus stars**.
+- Correct answers earn **10 XP** each (+25 for a perfect round); levels require `100 + (level − 1) × 25` XP.
 
-To learn more about Next.js, take a look at the following resources:
+## Questions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All questions live in one JSON file:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/data/questions.json
+```
 
-## Deploy on Vercel
+Each question uses this schema:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```json
+{
+  "id": "science-001",
+  "category": "Science",
+  "subcategory": "Space",
+  "difficulty": "easy",
+  "question": "Which planet is known as the Red Planet?",
+  "answers": ["Venus", "Mars", "Jupiter", "Mercury"],
+  "correctAnswer": "Mars",
+  "explanation": "Mars appears red because iron minerals on its surface have oxidized."
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Rules:
+
+- `id` must be unique.
+- `answers` must contain exactly **4 distinct** choices.
+- `correctAnswer` must exactly match one of the `answers`.
+- `subcategory`, `difficulty`, and `explanation` are optional.
+
+To add or replace questions, edit that file — no code changes needed. Invalid records are skipped safely; in development, validation warnings and per-category totals are logged to the browser console. Categories shown in the game come from the data itself.
+
+## Progress storage
+
+All progress (level, XP, stars, trophies, statistics, settings) is stored in `localStorage` under the key `trivia-quest-progress`, in a versioned format. Corrupted or partial data is sanitized on load and never crashes the game.
+
+To reset progress: **Settings → Reset all progress** (asks for confirmation), or clear the site's local storage in the browser.
+
+## Deploying to Vercel
+
+The app builds as a fully static site.
+
+1. Push this folder to a Git repository (GitHub, GitLab, or Bitbucket).
+2. In [Vercel](https://vercel.com), choose **Add New → Project** and import the repository.
+3. Vercel detects Next.js automatically — accept the defaults and deploy.
+
+Or with the CLI: `npx vercel` from this directory.
+
+## Assumptions and limitations
+
+- Progress lives in one browser on one device; there are no cloud saves or accounts (by design for V1).
+- The speed bonus only applies when the timer is enabled.
+- A "perfect round" requires 10 of 10, so categories with fewer than 10 questions can't award the perfect-round bonus.
+- Sounds are lightweight browser-generated tones (Web Audio API) — no audio files. They can be turned off in Settings.
+- Difficulty is stored per question but does not yet affect gameplay (reserved for a future version).
