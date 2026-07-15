@@ -9,9 +9,16 @@ interface Props {
   dailyBonusAvailable: boolean;
   onQuickPlay: () => void;
   onNavigate: (screen: Screen) => void;
+  onHowToPlay: () => void;
 }
 
-export default function HomeScreen({ progress, dailyBonusAvailable, onQuickPlay, onNavigate }: Props) {
+export default function HomeScreen({
+  progress,
+  dailyBonusAvailable,
+  onQuickPlay,
+  onNavigate,
+  onHowToPlay,
+}: Props) {
   const xpNeeded = xpNeededForNextLevel(progress.level);
   return (
     <div className="flex flex-col gap-5">
@@ -88,6 +95,14 @@ export default function HomeScreen({ progress, dailyBonusAvailable, onQuickPlay,
           </button>
         ))}
       </nav>
+
+      <button
+        type="button"
+        onClick={onHowToPlay}
+        className="mx-auto rounded-full px-4 py-1.5 text-sm font-bold text-slate-500 transition hover:text-slate-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+      >
+        ❓ How to play
+      </button>
     </div>
   );
 }

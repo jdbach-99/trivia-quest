@@ -16,6 +16,7 @@ import ResultsScreen from "./ResultsScreen";
 import TrophyShelf from "./TrophyShelf";
 import StatsScreen from "./StatsScreen";
 import SettingsScreen from "./SettingsScreen";
+import HowToPlay from "./HowToPlay";
 import Modal from "./Modal";
 
 interface RoundConfig {
@@ -32,6 +33,7 @@ export default function Game() {
   const [outcome, setOutcome] = useState<RoundOutcome | null>(null);
   const [lastConfig, setLastConfig] = useState<RoundConfig>({ mode: "mixed" });
   const [emptyMessage, setEmptyMessage] = useState<string | null>(null);
+  const [howToPlayOpen, setHowToPlayOpen] = useState(false);
 
   useEffect(() => {
     // localStorage can only be read after mount; the server render (and the
@@ -126,6 +128,11 @@ export default function Game() {
   };
 
   const dailyBonusAvailable = isDailyBonusAvailable(progress.lastDailyBonusDate, localDateString());
+  const introOpen = howToPlayOpen || (screen === "home" && !progress.hasSeenIntro);
+  const closeIntro = () => {
+    setHowToPlayOpen(false);
+    if (!progress.hasSeenIntro) update({ ...progress, hasSeenIntro: true });
+  };
 
   return (
     <div className={progress.settings.reducedMotion ? "reduced-motion" : undefined}>
@@ -135,6 +142,10 @@ export default function Game() {
           dailyBonusAvailable={dailyBonusAvailable}
           onQuickPlay={() => startRound({ mode: "mixed" })}
           onNavigate={navigate}
+          onHowToPlay={() => {
+            sounds.tap();
+            setHowToPlayOpen(true);
+          }}
         />
       )}
       {screen === "categories" && (
@@ -181,6 +192,8 @@ export default function Game() {
           onBack={() => navigate("home")}
         />
       )}
+
+      <HowToPlay open={introOpen} onClose={closeIntro} />
 
       <Modal open={emptyMessage !== null} title="Not enough questions" onClose={() => setEmptyMessage(null)}>
         <p className="mb-4 text-sm font-medium text-slate-600">{emptyMessage}</p>

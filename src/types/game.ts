@@ -60,6 +60,8 @@ export interface CategoryStats {
 
 export interface PlayerProgress {
   version: number;
+  /** First-launch intro has been seen and dismissed. */
+  hasSeenIntro: boolean;
   level: number;
   xp: number;
   stars: number;

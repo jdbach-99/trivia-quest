@@ -6,6 +6,7 @@ export const CURRENT_VERSION = 1;
 export function defaultProgress(): PlayerProgress {
   return {
     version: CURRENT_VERSION,
+    hasSeenIntro: false,
     level: 1,
     xp: 0,
     stars: 0,
@@ -73,6 +74,7 @@ export function sanitizeProgress(data: unknown): PlayerProgress {
 
   return {
     version: CURRENT_VERSION,
+    hasSeenIntro: safeBoolean(data.hasSeenIntro, false),
     level: Math.floor(safeNumber(data.level, base.level, 1)),
     xp: safeNumber(data.xp, base.xp),
     stars: safeNumber(data.stars, base.stars),
