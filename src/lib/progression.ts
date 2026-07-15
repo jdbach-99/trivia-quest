@@ -1,6 +1,5 @@
 export const XP_PER_CORRECT = 10;
 export const PERFECT_ROUND_XP_BONUS = 25;
-export const DAILY_BONUS_STARS = 2;
 export const PERFECT_ROUND_SIZE = 10;
 
 export function starsForRound(correctCount: number): number {
@@ -38,14 +37,10 @@ export function applyXp(
   return { level: newLevel, xp: newXp, levelsGained };
 }
 
-/** Local calendar date as YYYY-MM-DD, used for daily bonus and days played. */
+/** Local calendar date as YYYY-MM-DD, used for the days-played stat. */
 export function localDateString(date: Date = new Date()): string {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, "0");
   const d = String(date.getDate()).padStart(2, "0");
   return `${y}-${m}-${d}`;
-}
-
-export function isDailyBonusAvailable(lastDailyBonusDate: string | null, today: string): boolean {
-  return lastDailyBonusDate !== today;
 }

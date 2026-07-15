@@ -35,26 +35,17 @@ function makeRound(correctCount: number, options: Partial<RoundState> = {}): Rou
 }
 
 describe("applyRoundResults", () => {
-  it("awards accuracy stars plus the daily bonus on the first round of the day", () => {
+  it("awards accuracy stars and updates the balance", () => {
     const outcome = applyRoundResults(defaultProgress(), makeRound(6), TODAY);
     expect(outcome.starsFromAccuracy).toBe(2);
-    expect(outcome.dailyBonusStars).toBe(2);
-    expect(outcome.starsEarned).toBe(4);
-    expect(outcome.progress.stars).toBe(4);
-    expect(outcome.progress.lastDailyBonusDate).toBe(TODAY);
+    expect(outcome.starsEarned).toBe(2);
+    expect(outcome.progress.stars).toBe(2);
   });
 
-  it("awards the daily bonus only once per day", () => {
+  it("tracks distinct days played without duplicates", () => {
     const first = applyRoundResults(defaultProgress(), makeRound(6), TODAY);
-    const second = applyRoundResults(first.progress, makeRound(6), TODAY);
-    expect(second.dailyBonusStars).toBe(0);
-    expect(second.starsEarned).toBe(2);
-  });
-
-  it("awards the daily bonus again on a new day without resetting anything", () => {
-    const first = applyRoundResults(defaultProgress(), makeRound(6), TODAY);
-    const nextWeek = applyRoundResults(first.progress, makeRound(6), "2026-07-22");
-    expect(nextWeek.dailyBonusStars).toBe(2);
+    const sameDay = applyRoundResults(first.progress, makeRound(6), TODAY);
+    const nextWeek = applyRoundResults(sameDay.progress, makeRound(6), "2026-07-22");
     expect(nextWeek.progress.daysPlayed).toEqual([TODAY, "2026-07-22"]);
   });
 
@@ -62,7 +53,7 @@ describe("applyRoundResults", () => {
     const outcome = applyRoundResults(defaultProgress(), makeRound(10), TODAY);
     expect(outcome.perfectBonusStar).toBe(true);
     expect(outcome.starsFromAccuracy).toBe(3);
-    expect(outcome.starsEarned).toBe(6); // 3 + 1 perfect + 2 daily
+    expect(outcome.starsEarned).toBe(4); // 3 + 1 perfect
     expect(outcome.xpEarned).toBe(125);
     expect(outcome.progress.stats.perfectRounds).toBe(1);
   });

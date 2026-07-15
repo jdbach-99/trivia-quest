@@ -11,6 +11,7 @@ interface Props {
   subcategoriesByCategory: Record<string, string[]>;
   progress: PlayerProgress;
   onPick: (category: string, subcategory?: string) => void;
+  onPlayMixed: () => void;
   onBack: () => void;
 }
 
@@ -20,14 +21,33 @@ export default function CategoryScreen({
   subcategoriesByCategory,
   progress,
   onPick,
+  onPlayMixed,
   onBack,
 }: Props) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
         <BackButton onClick={onBack} />
-        <h1 className="text-2xl font-extrabold text-slate-900">Pick a Category</h1>
+        <h1 className="text-2xl font-extrabold text-slate-900">What do you want to play?</h1>
       </div>
+
+      {categories.length > 0 && (
+        <button
+          type="button"
+          onClick={onPlayMixed}
+          className="flex w-full items-center gap-3 rounded-2xl bg-sky-500 p-4 text-left shadow-md transition hover:bg-sky-600 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+        >
+          <span aria-hidden="true" className="text-3xl">
+            🎲
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-lg font-extrabold text-white">Everything</span>
+            <span className="block text-xs font-semibold text-sky-100">
+              A mix of questions from all categories
+            </span>
+          </span>
+        </button>
+      )}
 
       {categories.length === 0 && (
         <p className="rounded-2xl bg-amber-100 px-4 py-3 text-center font-semibold text-amber-900">

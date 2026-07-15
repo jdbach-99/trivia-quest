@@ -12,7 +12,6 @@ export function defaultProgress(): PlayerProgress {
     stars: 0,
     unlockedTrophies: [],
     recentQuestionIds: [],
-    lastDailyBonusDate: null,
     daysPlayed: [],
     settings: {
       soundEnabled: true,
@@ -80,7 +79,6 @@ export function sanitizeProgress(data: unknown): PlayerProgress {
     stars: safeNumber(data.stars, base.stars),
     unlockedTrophies: safeStringArray(data.unlockedTrophies),
     recentQuestionIds: safeStringArray(data.recentQuestionIds),
-    lastDailyBonusDate: typeof data.lastDailyBonusDate === "string" ? data.lastDailyBonusDate : null,
     daysPlayed: safeStringArray(data.daysPlayed),
     settings: {
       soundEnabled: safeBoolean(settings.soundEnabled, base.settings.soundEnabled),

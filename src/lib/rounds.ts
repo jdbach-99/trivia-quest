@@ -2,8 +2,6 @@ import type { CategoryStats, PlayerProgress, RoundState } from "@/types/game";
 import { RECENT_QUESTION_LIMIT } from "./constants";
 import {
   applyXp,
-  DAILY_BONUS_STARS,
-  isDailyBonusAvailable,
   isPerfectRound,
   localDateString,
   starsForRound,
@@ -18,7 +16,6 @@ export interface RoundOutcome {
   bestStreak: number;
   starsFromAccuracy: number;
   perfectBonusStar: boolean;
-  dailyBonusStars: number;
   starsEarned: number;
   xpEarned: number;
   levelsGained: number;
@@ -46,10 +43,7 @@ export function applyRoundResults(
   const correctCount = round.correctCount;
   const perfect = isPerfectRound(correctCount, totalQuestions);
   const starsFromAccuracy = starsForRound(correctCount);
-  const dailyBonusStars = isDailyBonusAvailable(progress.lastDailyBonusDate, today)
-    ? DAILY_BONUS_STARS
-    : 0;
-  const starsEarned = starsFromAccuracy + (perfect ? 1 : 0) + dailyBonusStars;
+  const starsEarned = starsFromAccuracy + (perfect ? 1 : 0);
   const xpEarned = xpForRound(correctCount, perfect);
   const leveled = applyXp(progress.level, progress.xp, xpEarned);
   const newHighScore = round.score > progress.stats.highestScore && round.score > 0;
@@ -83,7 +77,6 @@ export function applyRoundResults(
     xp: leveled.xp,
     stars: progress.stars + starsEarned,
     recentQuestionIds,
-    lastDailyBonusDate: dailyBonusStars > 0 ? today : progress.lastDailyBonusDate,
     daysPlayed: progress.daysPlayed.includes(today)
       ? progress.daysPlayed
       : [...progress.daysPlayed, today],
@@ -107,7 +100,6 @@ export function applyRoundResults(
     bestStreak: round.bestStreak,
     starsFromAccuracy,
     perfectBonusStar: perfect,
-    dailyBonusStars,
     starsEarned,
     xpEarned,
     levelsGained: leveled.levelsGained,

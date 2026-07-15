@@ -5,7 +5,6 @@ import type { GameMode, PlayerProgress, RoundState, Screen, Settings } from "@/t
 import { categories, categoryTotals, questions, subcategoriesByCategory } from "@/lib/questions";
 import { selectQuestions } from "@/lib/questionSelector";
 import { applyRoundResults, type RoundOutcome } from "@/lib/rounds";
-import { isDailyBonusAvailable, localDateString } from "@/lib/progression";
 import { clearProgress, defaultProgress, loadProgress, saveProgress } from "@/lib/storage";
 import { TROPHIES } from "@/data/trophies";
 import { useSound } from "@/hooks/useSound";
@@ -130,7 +129,6 @@ export default function Game() {
     setScreen(target);
   };
 
-  const dailyBonusAvailable = isDailyBonusAvailable(progress.lastDailyBonusDate, localDateString());
   const introOpen = howToPlayOpen || (screen === "home" && !progress.hasSeenIntro);
   const closeIntro = () => {
     setHowToPlayOpen(false);
@@ -142,8 +140,7 @@ export default function Game() {
       {screen === "home" && (
         <HomeScreen
           progress={progress}
-          dailyBonusAvailable={dailyBonusAvailable}
-          onQuickPlay={() => startRound({ mode: "mixed" })}
+          onPlay={() => navigate("categories")}
           onNavigate={navigate}
           onHowToPlay={() => {
             sounds.tap();
@@ -158,6 +155,7 @@ export default function Game() {
           subcategoriesByCategory={subcategoriesByCategory}
           progress={progress}
           onPick={(category, subcategory) => startRound({ mode: "category", category, subcategory })}
+          onPlayMixed={() => startRound({ mode: "mixed" })}
           onBack={() => navigate("home")}
         />
       )}

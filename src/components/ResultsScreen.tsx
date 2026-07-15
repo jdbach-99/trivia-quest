@@ -53,7 +53,6 @@ export default function ResultsScreen({ outcome, onPlayAgain, onChooseCategory, 
           <li>
             {outcome.starsFromAccuracy} star{outcome.starsFromAccuracy !== 1 && "s"} for accuracy
             {outcome.perfectBonusStar && " · +1 perfect round"}
-            {outcome.dailyBonusStars > 0 && ` · +${outcome.dailyBonusStars} daily bonus`}
           </li>
         </ul>
       </section>

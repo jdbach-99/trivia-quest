@@ -6,19 +6,12 @@ import ProgressBar from "./ProgressBar";
 
 interface Props {
   progress: PlayerProgress;
-  dailyBonusAvailable: boolean;
-  onQuickPlay: () => void;
+  onPlay: () => void;
   onNavigate: (screen: Screen) => void;
   onHowToPlay: () => void;
 }
 
-export default function HomeScreen({
-  progress,
-  dailyBonusAvailable,
-  onQuickPlay,
-  onNavigate,
-  onHowToPlay,
-}: Props) {
+export default function HomeScreen({ progress, onPlay, onNavigate, onHowToPlay }: Props) {
   const xpNeeded = xpNeededForNextLevel(progress.level);
   return (
     <div className="flex flex-col gap-5">
@@ -48,30 +41,12 @@ export default function HomeScreen({
         </p>
       </section>
 
-      <p
-        className={`rounded-2xl px-4 py-3 text-center text-sm font-semibold ${
-          dailyBonusAvailable ? "bg-amber-100 text-amber-900" : "bg-emerald-100 text-emerald-900"
-        }`}
-      >
-        {dailyBonusAvailable
-          ? "🎁 Daily bonus: complete a round today to earn 2 extra stars!"
-          : "✅ Daily bonus earned — see you tomorrow!"}
-      </p>
-
       <button
         type="button"
-        onClick={onQuickPlay}
-        className="w-full rounded-3xl bg-sky-500 py-6 text-2xl font-extrabold text-white shadow-lg transition hover:bg-sky-600 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+        onClick={onPlay}
+        className="w-full rounded-3xl bg-sky-500 py-8 text-3xl font-extrabold text-white shadow-lg transition hover:bg-sky-600 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
       >
-        ▶ Quick Play
-      </button>
-
-      <button
-        type="button"
-        onClick={() => onNavigate("categories")}
-        className="w-full rounded-3xl border-2 border-violet-300 bg-white py-4 text-lg font-bold text-violet-900 shadow-sm transition hover:bg-violet-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-violet-300"
-      >
-        🗂️ Category Play
+        ▶ Play
       </button>
 
       <nav aria-label="More" className="grid grid-cols-3 gap-3">

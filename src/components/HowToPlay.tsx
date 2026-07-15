@@ -8,10 +8,9 @@ interface Props {
 }
 
 const TIPS: [string, string][] = [
-  ["🎯", "Answer 10 questions each round. Tap the answer you think is right!"],
+  ["🎯", "Pick a topic and answer 10 questions. Tap the answer you think is right!"],
   ["⚡", "Answer fast and keep a streak going to earn extra points."],
   ["⭐", "Finishing a round earns stars — spend them on trophies for your shelf."],
-  ["🎁", "Come back every day: your first round earns 2 bonus stars."],
 ];
 
 export default function HowToPlay({ open, onClose }: Props) {

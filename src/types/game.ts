@@ -68,7 +68,6 @@ export interface PlayerProgress {
   stars: number;
   unlockedTrophies: string[];
   recentQuestionIds: string[];
-  lastDailyBonusDate: string | null;
   daysPlayed: string[];
   settings: Settings;
   stats: Stats;

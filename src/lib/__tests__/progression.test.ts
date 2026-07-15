@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
   applyXp,
-  isDailyBonusAvailable,
   isPerfectRound,
   starsForRound,
   xpForRound,
@@ -55,13 +54,5 @@ describe("applyXp", () => {
 
   it("does not level up below the threshold", () => {
     expect(applyXp(1, 0, 99)).toEqual({ level: 1, xp: 99, levelsGained: 0 });
-  });
-});
-
-describe("isDailyBonusAvailable", () => {
-  it("is available for new players and new days, once per day", () => {
-    expect(isDailyBonusAvailable(null, "2026-07-15")).toBe(true);
-    expect(isDailyBonusAvailable("2026-07-14", "2026-07-15")).toBe(true);
-    expect(isDailyBonusAvailable("2026-07-15", "2026-07-15")).toBe(false);
   });
 });
