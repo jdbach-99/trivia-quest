@@ -6,27 +6,27 @@ export interface CategoryStyle {
 }
 
 const KNOWN: Record<string, CategoryStyle> = {
-  Books: {
+  "Books Hugo Likes": {
     emoji: "📚",
     chip: "bg-amber-400/20 text-amber-300",
     button: "border-amber-400/40 hover:border-amber-400 hover:bg-amber-400/10",
   },
-  Movies: {
+  "Movies Hugo has probably seen": {
     emoji: "🎬",
     chip: "bg-violet-400/20 text-violet-300",
     button: "border-violet-400/40 hover:border-violet-400 hover:bg-violet-400/10",
   },
-  Food: {
+  "Hugo Eats": {
     emoji: "🍜",
     chip: "bg-rose-400/20 text-rose-300",
     button: "border-rose-400/40 hover:border-rose-400 hover:bg-rose-400/10",
   },
-  Garden: {
+  "Hugo Plants": {
     emoji: "🌻",
     chip: "bg-emerald-400/20 text-emerald-300",
     button: "border-emerald-400/40 hover:border-emerald-400 hover:bg-emerald-400/10",
   },
-  "Video Games": {
+  "Hugo Games": {
     emoji: "🎮",
     chip: "bg-sky-400/20 text-sky-300",
     button: "border-sky-400/40 hover:border-sky-400 hover:bg-sky-400/10",

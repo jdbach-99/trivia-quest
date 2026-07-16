@@ -25,26 +25,23 @@ export default function CategoryScreen({
   onBack,
 }: Props) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2.5">
       <div className="flex items-center gap-3">
         <BackButton onClick={onBack} />
-        <h1 className="text-2xl font-extrabold text-slate-100">What do you want to play?</h1>
+        <h1 className="text-xl font-extrabold text-slate-100">What do you want to play?</h1>
       </div>
 
       {categories.length > 0 && (
         <button
           type="button"
           onClick={onPlayMixed}
-          className="flex w-full items-center gap-3 rounded-2xl bg-sky-400 p-4 text-left shadow-md transition hover:bg-sky-300 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
+          className="flex w-full items-center gap-2.5 rounded-xl bg-sky-400 px-3 py-2.5 text-left shadow-md transition hover:bg-sky-300 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
         >
-          <span aria-hidden="true" className="text-3xl">
+          <span aria-hidden="true" className="text-2xl">
             🎲
           </span>
-          <span className="min-w-0 flex-1">
-            <span className="block text-lg font-extrabold text-navy-950">Everything</span>
-            <span className="block text-xs font-semibold text-sky-950/70">
-              A mix of questions from all categories
-            </span>
+          <span className="min-w-0 flex-1 text-base font-extrabold text-navy-950">
+            A Bit of Everything
           </span>
         </button>
       )}
@@ -55,54 +52,49 @@ export default function CategoryScreen({
         </p>
       )}
 
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-2.5">
         {categories.map((category) => {
           const style = categoryStyle(category);
           const stats = progress.categoryStats[category];
           const answered = stats?.questionsAnswered ?? 0;
           const correct = stats?.correctAnswers ?? 0;
           const tier = masteryTier(answered, correct);
-          const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : null;
           const count = categoryTotals[category] ?? 0;
           const subcategories = subcategoriesByCategory[category] ?? [];
           return (
             <li
               key={category}
-              className={`rounded-2xl border-2 bg-navy-800 p-3 shadow-sm ${style.button}`}
+              className={`rounded-xl border-2 bg-navy-800 px-3 py-2.5 shadow-sm ${style.button}`}
             >
               <button
                 type="button"
                 onClick={() => onPick(category)}
                 disabled={count === 0}
                 aria-label={`Play all ${category}`}
-                className="flex w-full items-center gap-3 rounded-xl text-left transition active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70 disabled:opacity-50"
+                className="flex w-full items-center gap-2.5 rounded-lg text-left transition active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70 disabled:opacity-50"
               >
-                <span aria-hidden="true" className="text-3xl">
+                <span aria-hidden="true" className="text-2xl">
                   {style.emoji}
                 </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-lg font-bold text-slate-100">{category}</span>
-                  <span className="block text-xs font-medium text-slate-400">
-                    {count} questions
-                    {accuracy !== null && ` · ${accuracy}% accuracy`}
-                  </span>
+                <span className="min-w-0 flex-1 truncate text-base font-bold text-slate-100">
+                  {category}
                 </span>
                 <span
-                  className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold ${style.chip}`}
+                  className={`shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-bold ${style.chip}`}
                   aria-label={`Mastery: ${tier}`}
                 >
                   {MASTERY_BADGES[tier]} {tier}
                 </span>
               </button>
               {subcategories.length > 0 && (
-                <div className="mt-2.5 flex flex-wrap gap-2">
+                <div className="mt-2 flex flex-wrap gap-1.5">
                   {subcategories.map((subcategory) => (
                     <button
                       key={subcategory}
                       type="button"
                       onClick={() => onPick(category, subcategory)}
                       aria-label={`Play ${subcategory}`}
-                      className={`min-h-[38px] rounded-full px-3.5 py-1.5 text-sm font-bold transition hover:brightness-95 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70 ${style.chip}`}
+                      className={`rounded-full px-3 py-1.5 text-xs font-bold transition hover:brightness-95 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70 ${style.chip}`}
                     >
                       {subcategory}
                     </button>
