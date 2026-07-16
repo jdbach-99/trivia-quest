@@ -26,7 +26,7 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
   const [selected, setSelected] = useState<string | null>(null);
   const [timedOut, setTimedOut] = useState(false);
   const [lastPoints, setLastPoints] = useState(0);
-  const [remaining, setRemaining] = useState(TIMER_SECONDS);
+  const [remainingMs, setRemainingMs] = useState(TIMER_SECONDS * 1000);
   const [confirmQuit, setConfirmQuit] = useState(false);
 
   // Refs mirror state so timer callbacks and key handlers never act on
@@ -63,7 +63,7 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
     setSelected(null);
     setTimedOut(false);
     setLastPoints(0);
-    setRemaining(TIMER_SECONDS);
+    setRemainingMs(TIMER_SECONDS * 1000);
     const next = { ...current, currentQuestionIndex: current.currentQuestionIndex + 1 };
     roundRef.current = next;
     setRound(next);
@@ -122,23 +122,24 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
   }, [handleAnswer, advance]);
 
   // Question timer. Restarts per question; pauses while the quit dialog is
-  // open. `remaining` is reset in advance() so the effect body stays setState-free.
+  // open. Ticks at 100ms so the bar drains smoothly; `remainingMs` is reset
+  // in advance() so the effect body stays setState-free.
   useEffect(() => {
     if (!timerEnabled) return;
     deadlineRef.current = Date.now() + TIMER_SECONDS * 1000;
     const interval = setInterval(() => {
       if (phaseRef.current !== "answering") return;
       if (confirmQuitRef.current) {
-        deadlineRef.current += 200;
+        deadlineRef.current += 100;
         return;
       }
-      const secs = Math.max(0, Math.ceil((deadlineRef.current - Date.now()) / 1000));
-      setRemaining(secs);
-      if (secs <= 0) {
+      const ms = Math.max(0, deadlineRef.current - Date.now());
+      setRemainingMs(ms);
+      if (ms <= 0) {
         clearInterval(interval);
         handleAnswerRef.current(null);
       }
-    }, 200);
+    }, 100);
     return () => clearInterval(interval);
   }, [round.currentQuestionIndex, timerEnabled]);
 
@@ -174,7 +175,8 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
   };
 
   const correct = selected !== null && selected === question.correctAnswer;
-  const timerUrgent = timerEnabled && remaining <= 5 && phase === "answering";
+  const remainingSeconds = Math.ceil(remainingMs / 1000);
+  const timerUrgent = timerEnabled && remainingMs <= 5000 && phase === "answering";
 
   return (
     <div className="flex flex-col gap-3">
@@ -216,19 +218,19 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
       {timerEnabled && (
         <div>
           <ProgressBar
-            value={remaining}
+            value={remainingMs / 1000}
             max={TIMER_SECONDS}
-            label={`Time remaining: ${remaining} seconds`}
-            barClassName={timerUrgent ? "bg-rose-500" : "bg-emerald-500"}
+            label={`Time remaining: ${remainingSeconds} seconds`}
+            barClassName={timerUrgent ? "timer-urgent bg-rose-500" : "bg-emerald-500"}
             heightClassName="h-2"
           />
           <p
             className={`mt-1 text-right text-xs font-bold ${
-              timerUrgent ? "animate-pulse text-rose-600" : "text-slate-500"
+              timerUrgent ? "text-rose-600" : "text-slate-500"
             }`}
             aria-hidden="true"
           >
-            {remaining}s
+            {remainingSeconds}s
           </p>
         </div>
       )}
