@@ -196,10 +196,9 @@ export default function Game() {
           sounds.tap();
           setHowToPlayOpen(true);
         }}
-        aria-label="How to play"
-        className="fixed bottom-3 right-3 z-40 flex h-9 w-9 items-center justify-center rounded-full border-2 border-navy-600 bg-navy-800 text-sm font-extrabold text-slate-400 shadow-md transition hover:border-sky-400 hover:text-sky-300 active:scale-[0.94] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
+        className="fixed bottom-3 right-3 z-40 rounded-full border-2 border-navy-600 bg-navy-800 px-3.5 py-1.5 text-xs font-bold text-slate-400 shadow-md transition hover:border-sky-400 hover:text-sky-300 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
       >
-        ?
+        How to play
       </button>
 
       <HowToPlay open={introOpen} onClose={closeIntro} />
