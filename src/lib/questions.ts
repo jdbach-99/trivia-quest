@@ -5,7 +5,7 @@ const result = validateQuestions(rawQuestions);
 
 if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
   console.groupCollapsed(
-    `[Trivia Quest] Loaded ${result.valid.length} valid questions` +
+    `[Hugo Trivia] Loaded ${result.valid.length} valid questions` +
       (result.warnings.length > 0 ? ` (${result.warnings.length} skipped)` : "")
   );
   console.table(result.categoryTotals);

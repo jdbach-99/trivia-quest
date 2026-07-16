@@ -1,4 +1,4 @@
-# Trivia Quest
+# Hugo Trivia
 
 A mobile-first trivia game for kids (around age 10). Answer 10-question rounds, build streaks, earn stars, and spend them on a shelf of collectible trophies. Everything runs in the browser — no backend, no accounts, no tracking.
 

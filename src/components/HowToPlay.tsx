@@ -15,7 +15,7 @@ const TIPS: [string, string][] = [
 
 export default function HowToPlay({ open, onClose }: Props) {
   return (
-    <Modal open={open} title="Welcome to Trivia Quest! 🧠" onClose={onClose}>
+    <Modal open={open} title="Welcome to Hugo Trivia! 🧠" onClose={onClose}>
       <ul className="mb-5 space-y-3">
         {TIPS.map(([emoji, tip]) => (
           <li key={emoji} className="flex items-start gap-3">

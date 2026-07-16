@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Trivia Quest",
+  title: "Hugo Trivia",
   description: "A fast, friendly trivia game — earn stars, build streaks, and fill your trophy shelf!",
 };
 

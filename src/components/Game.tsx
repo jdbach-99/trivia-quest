@@ -47,7 +47,7 @@ export default function Game() {
   if (!progress) {
     return (
       <p className="py-24 text-center text-xl font-bold text-slate-400" role="status">
-        🧠 Loading Trivia Quest…
+        🧠 Loading Hugo Trivia…
       </p>
     );
   }

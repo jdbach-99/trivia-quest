@@ -79,7 +79,7 @@ export default function TrophyShelf({ progress, onUnlock, onBack }: Props) {
       {celebrating && (
         <div
           role="status"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
           onClick={() => setCelebrating(null)}
         >
           <div className="pop-in flex flex-col items-center gap-2 rounded-3xl bg-navy-800 p-8 shadow-xl">

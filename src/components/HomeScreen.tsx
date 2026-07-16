@@ -17,7 +17,7 @@ export default function HomeScreen({ progress, onPlay, onNavigate, onHowToPlay }
     <div className="flex flex-col gap-5">
       <header className="pt-2 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-100">
-          <span aria-hidden="true">🧠 </span>Trivia Quest
+          <span aria-hidden="true">🧠 </span>Hugo Trivia
         </h1>
       </header>
 
