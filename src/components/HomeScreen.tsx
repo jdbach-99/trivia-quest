@@ -8,10 +8,9 @@ interface Props {
   progress: PlayerProgress;
   onPlay: () => void;
   onNavigate: (screen: Screen) => void;
-  onHowToPlay: () => void;
 }
 
-export default function HomeScreen({ progress, onPlay, onNavigate, onHowToPlay }: Props) {
+export default function HomeScreen({ progress, onPlay, onNavigate }: Props) {
   const xpNeeded = xpNeededForNextLevel(progress.level);
   return (
     <div className="flex flex-col gap-5">
@@ -70,14 +69,6 @@ export default function HomeScreen({ progress, onPlay, onNavigate, onHowToPlay }
           </button>
         ))}
       </nav>
-
-      <button
-        type="button"
-        onClick={onHowToPlay}
-        className="mx-auto rounded-full px-4 py-1.5 text-sm font-bold text-slate-400 transition hover:text-slate-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
-      >
-        ❓ How to play
-      </button>
     </div>
   );
 }

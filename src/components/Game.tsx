@@ -142,10 +142,6 @@ export default function Game() {
           progress={progress}
           onPlay={() => navigate("categories")}
           onNavigate={navigate}
-          onHowToPlay={() => {
-            sounds.tap();
-            setHowToPlayOpen(true);
-          }}
         />
       )}
       {screen === "categories" && (
@@ -193,6 +189,18 @@ export default function Game() {
           onBack={() => navigate("home")}
         />
       )}
+
+      <button
+        type="button"
+        onClick={() => {
+          sounds.tap();
+          setHowToPlayOpen(true);
+        }}
+        aria-label="How to play"
+        className="fixed bottom-3 right-3 z-40 flex h-9 w-9 items-center justify-center rounded-full border-2 border-navy-600 bg-navy-800 text-sm font-extrabold text-slate-400 shadow-md transition hover:border-sky-400 hover:text-sky-300 active:scale-[0.94] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
+      >
+        ?
+      </button>
 
       <HowToPlay open={introOpen} onClose={closeIntro} />
 
