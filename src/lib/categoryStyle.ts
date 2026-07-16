@@ -6,12 +6,12 @@ export interface CategoryStyle {
 }
 
 const KNOWN: Record<string, CategoryStyle> = {
-  "Books Hugo Likes": {
+  "Hugo Books": {
     emoji: "📚",
     chip: "bg-amber-400/20 text-amber-300",
     button: "border-amber-400/40 hover:border-amber-400 hover:bg-amber-400/10",
   },
-  "Movies Hugo has probably seen": {
+  "Hugo Films": {
     emoji: "🎬",
     chip: "bg-violet-400/20 text-violet-300",
     button: "border-violet-400/40 hover:border-violet-400 hover:bg-violet-400/10",

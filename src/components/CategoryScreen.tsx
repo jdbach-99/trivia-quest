@@ -41,7 +41,7 @@ export default function CategoryScreen({
             🎲
           </span>
           <span className="min-w-0 flex-1 text-base font-extrabold text-navy-950">
-            A Bit of Everything
+            A Bit of It All
           </span>
         </button>
       )}
