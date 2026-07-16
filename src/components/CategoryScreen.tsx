@@ -28,21 +28,21 @@ export default function CategoryScreen({
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
         <BackButton onClick={onBack} />
-        <h1 className="text-2xl font-extrabold text-slate-900">What do you want to play?</h1>
+        <h1 className="text-2xl font-extrabold text-slate-100">What do you want to play?</h1>
       </div>
 
       {categories.length > 0 && (
         <button
           type="button"
           onClick={onPlayMixed}
-          className="flex w-full items-center gap-3 rounded-2xl bg-sky-500 p-4 text-left shadow-md transition hover:bg-sky-600 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+          className="flex w-full items-center gap-3 rounded-2xl bg-sky-400 p-4 text-left shadow-md transition hover:bg-sky-300 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
         >
           <span aria-hidden="true" className="text-3xl">
             🎲
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-lg font-extrabold text-white">Everything</span>
-            <span className="block text-xs font-semibold text-sky-100">
+            <span className="block text-lg font-extrabold text-navy-950">Everything</span>
+            <span className="block text-xs font-semibold text-sky-950/70">
               A mix of questions from all categories
             </span>
           </span>
@@ -50,7 +50,7 @@ export default function CategoryScreen({
       )}
 
       {categories.length === 0 && (
-        <p className="rounded-2xl bg-amber-100 px-4 py-3 text-center font-semibold text-amber-900">
+        <p className="rounded-2xl bg-amber-400/15 px-4 py-3 text-center font-semibold text-amber-300">
           We couldn&apos;t find any questions yet. Check the question data file.
         </p>
       )}
@@ -68,21 +68,21 @@ export default function CategoryScreen({
           return (
             <li
               key={category}
-              className={`rounded-2xl border-2 bg-white p-3 shadow-sm ${style.button}`}
+              className={`rounded-2xl border-2 bg-navy-800 p-3 shadow-sm ${style.button}`}
             >
               <button
                 type="button"
                 onClick={() => onPick(category)}
                 disabled={count === 0}
                 aria-label={`Play all ${category}`}
-                className="flex w-full items-center gap-3 rounded-xl text-left transition active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300 disabled:opacity-50"
+                className="flex w-full items-center gap-3 rounded-xl text-left transition active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70 disabled:opacity-50"
               >
                 <span aria-hidden="true" className="text-3xl">
                   {style.emoji}
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-lg font-bold text-slate-900">{category}</span>
-                  <span className="block text-xs font-medium text-slate-500">
+                  <span className="block text-lg font-bold text-slate-100">{category}</span>
+                  <span className="block text-xs font-medium text-slate-400">
                     {count} questions
                     {accuracy !== null && ` · ${accuracy}% accuracy`}
                   </span>
@@ -102,7 +102,7 @@ export default function CategoryScreen({
                       type="button"
                       onClick={() => onPick(category, subcategory)}
                       aria-label={`Play ${subcategory}`}
-                      className={`min-h-[38px] rounded-full px-3.5 py-1.5 text-sm font-bold transition hover:brightness-95 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300 ${style.chip}`}
+                      className={`min-h-[38px] rounded-full px-3.5 py-1.5 text-sm font-bold transition hover:brightness-95 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70 ${style.chip}`}
                     >
                       {subcategory}
                     </button>

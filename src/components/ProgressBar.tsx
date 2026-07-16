@@ -11,8 +11,8 @@ export default function ProgressBar({
   value,
   max,
   label,
-  barClassName = "bg-sky-500",
-  trackClassName = "bg-slate-200",
+  barClassName = "bg-sky-400",
+  trackClassName = "bg-navy-700",
   heightClassName = "h-3",
 }: Props) {
   const clamped = Math.max(0, Math.min(value, max));

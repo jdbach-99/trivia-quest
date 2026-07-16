@@ -30,10 +30,10 @@ export default function Modal({ open, title, children, onClose }: Props) {
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-xl"
+        className="w-full max-w-sm rounded-3xl bg-navy-800 p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="mb-3 text-lg font-bold text-slate-900">{title}</h2>
+        <h2 className="mb-3 text-lg font-bold text-slate-100">{title}</h2>
         {children}
       </div>
     </div>

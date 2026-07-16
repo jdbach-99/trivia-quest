@@ -36,23 +36,23 @@ export default function StatsScreen({ progress, onBack }: Props) {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
         <BackButton onClick={onBack} />
-        <h1 className="text-2xl font-extrabold text-slate-900">Statistics</h1>
+        <h1 className="text-2xl font-extrabold text-slate-100">Statistics</h1>
       </div>
 
-      <section className="rounded-3xl border-2 border-slate-200 bg-white p-4 shadow-sm">
-        <ul className="divide-y divide-slate-100">
+      <section className="rounded-3xl border-2 border-navy-700 bg-navy-800 p-4 shadow-sm">
+        <ul className="divide-y divide-navy-700">
           {rows.map(([label, value]) => (
             <li key={label} className="flex items-center justify-between py-2 text-sm">
-              <span className="font-semibold text-slate-600">{label}</span>
-              <span className="font-bold text-slate-900">{value}</span>
+              <span className="font-semibold text-slate-400">{label}</span>
+              <span className="font-bold text-slate-100">{value}</span>
             </li>
           ))}
         </ul>
       </section>
 
-      <h2 className="text-lg font-extrabold text-slate-900">Categories</h2>
+      <h2 className="text-lg font-extrabold text-slate-100">Categories</h2>
       {categories.length === 0 ? (
-        <p className="rounded-2xl bg-slate-100 px-4 py-3 text-center text-sm font-semibold text-slate-500">
+        <p className="rounded-2xl bg-navy-800 px-4 py-3 text-center text-sm font-semibold text-slate-400">
           Play a round to start tracking category stats!
         </p>
       ) : (
@@ -67,10 +67,10 @@ export default function StatsScreen({ progress, onBack }: Props) {
             return (
               <li
                 key={category}
-                className="rounded-3xl border-2 border-slate-200 bg-white p-4 shadow-sm"
+                className="rounded-3xl border-2 border-navy-700 bg-navy-800 p-4 shadow-sm"
               >
                 <div className="mb-1 flex items-center justify-between">
-                  <span className="font-bold text-slate-900">
+                  <span className="font-bold text-slate-100">
                     <span aria-hidden="true">{style.emoji} </span>
                     {category}
                   </span>
@@ -78,10 +78,10 @@ export default function StatsScreen({ progress, onBack }: Props) {
                     {MASTERY_BADGES[tier]} {tier}
                   </span>
                 </div>
-                <p className="text-sm font-medium text-slate-600">
+                <p className="text-sm font-medium text-slate-400">
                   {cs.correctAnswers} / {cs.questionsAnswered} correct · {catAccuracy}% accuracy
                 </p>
-                <p className="text-sm font-medium text-slate-600">
+                <p className="text-sm font-medium text-slate-400">
                   Best round: {cs.highestScore} · 3-star rounds: {cs.threeStarRounds}
                 </p>
               </li>

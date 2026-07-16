@@ -197,12 +197,12 @@ export default function Game() {
       <HowToPlay open={introOpen} onClose={closeIntro} />
 
       <Modal open={emptyMessage !== null} title="Not enough questions" onClose={() => setEmptyMessage(null)}>
-        <p className="mb-4 text-sm font-medium text-slate-600">{emptyMessage}</p>
+        <p className="mb-4 text-sm font-medium text-slate-400">{emptyMessage}</p>
         <button
           type="button"
           autoFocus
           onClick={() => setEmptyMessage(null)}
-          className="w-full rounded-xl bg-sky-500 px-4 py-2.5 font-bold text-white transition hover:bg-sky-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+          className="w-full rounded-xl bg-sky-400 px-4 py-2.5 font-bold text-navy-950 transition hover:bg-sky-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
         >
           OK
         </button>

@@ -8,46 +8,46 @@ export interface CategoryStyle {
 const KNOWN: Record<string, CategoryStyle> = {
   Books: {
     emoji: "📚",
-    chip: "bg-amber-100 text-amber-900",
-    button: "border-amber-300 hover:border-amber-500 hover:bg-amber-50",
+    chip: "bg-amber-400/20 text-amber-300",
+    button: "border-amber-400/40 hover:border-amber-400 hover:bg-amber-400/10",
   },
   Movies: {
     emoji: "🎬",
-    chip: "bg-violet-100 text-violet-900",
-    button: "border-violet-300 hover:border-violet-500 hover:bg-violet-50",
+    chip: "bg-violet-400/20 text-violet-300",
+    button: "border-violet-400/40 hover:border-violet-400 hover:bg-violet-400/10",
   },
   Food: {
     emoji: "🍜",
-    chip: "bg-rose-100 text-rose-900",
-    button: "border-rose-300 hover:border-rose-500 hover:bg-rose-50",
+    chip: "bg-rose-400/20 text-rose-300",
+    button: "border-rose-400/40 hover:border-rose-400 hover:bg-rose-400/10",
   },
   Garden: {
     emoji: "🌻",
-    chip: "bg-emerald-100 text-emerald-900",
-    button: "border-emerald-300 hover:border-emerald-500 hover:bg-emerald-50",
+    chip: "bg-emerald-400/20 text-emerald-300",
+    button: "border-emerald-400/40 hover:border-emerald-400 hover:bg-emerald-400/10",
   },
   "Video Games": {
     emoji: "🎮",
-    chip: "bg-sky-100 text-sky-900",
-    button: "border-sky-300 hover:border-sky-500 hover:bg-sky-50",
+    chip: "bg-sky-400/20 text-sky-300",
+    button: "border-sky-400/40 hover:border-sky-400 hover:bg-sky-400/10",
   },
 };
 
 const FALLBACKS: CategoryStyle[] = [
   {
     emoji: "🧠",
-    chip: "bg-cyan-100 text-cyan-900",
-    button: "border-cyan-300 hover:border-cyan-500 hover:bg-cyan-50",
+    chip: "bg-cyan-400/20 text-cyan-300",
+    button: "border-cyan-400/40 hover:border-cyan-400 hover:bg-cyan-400/10",
   },
   {
     emoji: "⭐",
-    chip: "bg-orange-100 text-orange-900",
-    button: "border-orange-300 hover:border-orange-500 hover:bg-orange-50",
+    chip: "bg-orange-400/20 text-orange-300",
+    button: "border-orange-400/40 hover:border-orange-400 hover:bg-orange-400/10",
   },
   {
     emoji: "🔍",
-    chip: "bg-lime-100 text-lime-900",
-    button: "border-lime-300 hover:border-lime-500 hover:bg-lime-50",
+    chip: "bg-lime-400/20 text-lime-300",
+    button: "border-lime-400/40 hover:border-lime-400 hover:bg-lime-400/10",
   },
 ];
 

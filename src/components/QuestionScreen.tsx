@@ -185,7 +185,7 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
           type="button"
           onClick={() => setConfirmQuit(true)}
           aria-label="Exit round"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-2 border-slate-200 bg-white text-slate-500 shadow-sm transition hover:border-slate-400 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-2 border-navy-700 bg-navy-800 text-slate-400 shadow-sm transition hover:border-navy-500 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
         >
           <span aria-hidden="true">✕</span>
         </button>
@@ -193,7 +193,7 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
           {style.emoji} {question.category}
           {question.subcategory && ` · ${question.subcategory}`}
         </span>
-        <span className="text-sm font-bold text-slate-600">
+        <span className="text-sm font-bold text-slate-400">
           {round.currentQuestionIndex + 1} / {total}
         </span>
       </div>
@@ -202,15 +202,15 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
         value={round.currentQuestionIndex + (phase === "feedback" ? 1 : 0)}
         max={total}
         label={`Round progress: question ${round.currentQuestionIndex + 1} of ${total}`}
-        barClassName="bg-violet-500"
+        barClassName="bg-violet-400"
         heightClassName="h-2"
       />
 
       <div className="flex items-center justify-between text-sm font-bold">
-        <span className="text-slate-700">
-          Score: <span className="text-sky-600">{round.score}</span>
+        <span className="text-slate-300">
+          Score: <span className="text-sky-400">{round.score}</span>
         </span>
-        <span className="text-slate-700" aria-label={`Current streak: ${round.currentStreak}`}>
+        <span className="text-slate-300" aria-label={`Current streak: ${round.currentStreak}`}>
           {round.currentStreak >= 2 ? "🔥" : "streak"} ×{round.currentStreak}
         </span>
       </div>
@@ -221,12 +221,12 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
             value={remainingMs / 1000}
             max={TIMER_SECONDS}
             label={`Time remaining: ${remainingSeconds} seconds`}
-            barClassName={timerUrgent ? "timer-urgent bg-rose-500" : "bg-emerald-500"}
+            barClassName={timerUrgent ? "timer-urgent bg-rose-400" : "bg-emerald-400"}
             heightClassName="h-2"
           />
           <p
             className={`mt-1 text-right text-xs font-bold ${
-              timerUrgent ? "text-rose-600" : "text-slate-500"
+              timerUrgent ? "text-rose-300" : "text-slate-400"
             }`}
             aria-hidden="true"
           >
@@ -235,7 +235,7 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
         </div>
       )}
 
-      <h2 className="min-h-16 rounded-3xl border-2 border-slate-200 bg-white p-4 text-lg font-bold leading-snug text-slate-900 shadow-sm">
+      <h2 className="min-h-16 rounded-3xl border-2 border-navy-700 bg-navy-800 p-4 text-lg font-bold leading-snug text-slate-100 shadow-sm">
         {question.question}
       </h2>
 
@@ -255,11 +255,11 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
         <div
           role="status"
           className={`pop-in flex items-center justify-between gap-3 rounded-2xl px-4 py-3 ${
-            correct ? "bg-emerald-100" : "bg-amber-100"
+            correct ? "bg-emerald-400/15" : "bg-amber-400/15"
           }`}
         >
           <div className="min-w-0">
-            <p className={`font-extrabold ${correct ? "text-emerald-800" : "text-amber-900"}`}>
+            <p className={`font-extrabold ${correct ? "text-emerald-300" : "text-amber-300"}`}>
               {correct
                 ? `Correct! +${lastPoints}`
                 : timedOut
@@ -270,13 +270,13 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
               )}
             </p>
             {question.explanation && (
-              <p className="mt-1 text-sm font-medium text-slate-700">{question.explanation}</p>
+              <p className="mt-1 text-sm font-medium text-slate-300">{question.explanation}</p>
             )}
           </div>
           <button
             type="button"
             onClick={advance}
-            className="shrink-0 rounded-xl bg-slate-900 px-4 py-2 font-bold text-white shadow transition hover:bg-slate-700 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+            className="shrink-0 rounded-xl bg-sky-400 px-4 py-2 font-bold text-navy-950 shadow transition hover:bg-sky-300 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
           >
             Next →
           </button>
@@ -284,7 +284,7 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
       )}
 
       <Modal open={confirmQuit} title="Leave this round?" onClose={() => setConfirmQuit(false)}>
-        <p className="mb-4 text-sm font-medium text-slate-600">
+        <p className="mb-4 text-sm font-medium text-slate-400">
           Your progress in this round won&apos;t be saved.
         </p>
         <div className="flex gap-2">
@@ -292,14 +292,14 @@ export default function QuestionScreen({ initialRound, timerEnabled, sounds, onC
             type="button"
             autoFocus
             onClick={() => setConfirmQuit(false)}
-            className="flex-1 rounded-xl bg-sky-500 px-4 py-2.5 font-bold text-white transition hover:bg-sky-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+            className="flex-1 rounded-xl bg-sky-400 px-4 py-2.5 font-bold text-navy-950 transition hover:bg-sky-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
           >
             Keep playing
           </button>
           <button
             type="button"
             onClick={onQuit}
-            className="flex-1 rounded-xl border-2 border-slate-300 bg-white px-4 py-2.5 font-bold text-slate-700 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+            className="flex-1 rounded-xl border-2 border-navy-600 bg-navy-800 px-4 py-2.5 font-bold text-slate-300 transition hover:bg-navy-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
           >
             Exit
           </button>

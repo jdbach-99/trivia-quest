@@ -29,8 +29,8 @@ export default function TrophyShelf({ progress, onUnlock, onBack }: Props) {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
         <BackButton onClick={onBack} />
-        <h1 className="flex-1 text-2xl font-extrabold text-slate-900">Trophy Shelf</h1>
-        <span className="text-lg font-bold text-amber-600" aria-label={`${progress.stars} stars available`}>
+        <h1 className="flex-1 text-2xl font-extrabold text-slate-100">Trophy Shelf</h1>
+        <span className="text-lg font-bold text-amber-400" aria-label={`${progress.stars} stars available`}>
           ⭐ {progress.stars}
         </span>
       </div>
@@ -43,7 +43,7 @@ export default function TrophyShelf({ progress, onUnlock, onBack }: Props) {
             <li
               key={trophy.id}
               className={`flex flex-col items-center gap-1 rounded-3xl border-2 p-4 text-center shadow-sm ${
-                unlocked ? "border-amber-300 bg-amber-50" : "border-slate-200 bg-white"
+                unlocked ? "border-amber-400/60 bg-amber-400/10" : "border-navy-700 bg-navy-800"
               }`}
             >
               <span
@@ -52,12 +52,12 @@ export default function TrophyShelf({ progress, onUnlock, onBack }: Props) {
               >
                 {trophy.emoji}
               </span>
-              <span className="text-sm font-bold text-slate-900">{trophy.name}</span>
+              <span className="text-sm font-bold text-slate-100">{trophy.name}</span>
               {unlocked ? (
-                <span className="text-xs font-bold text-amber-700">Unlocked!</span>
+                <span className="text-xs font-bold text-amber-300">Unlocked!</span>
               ) : (
                 <>
-                  <span className="text-xs font-semibold text-slate-500">⭐ {trophy.cost}</span>
+                  <span className="text-xs font-semibold text-slate-400">⭐ {trophy.cost}</span>
                   {affordable ? (
                     <button
                       type="button"
@@ -82,12 +82,12 @@ export default function TrophyShelf({ progress, onUnlock, onBack }: Props) {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
           onClick={() => setCelebrating(null)}
         >
-          <div className="pop-in flex flex-col items-center gap-2 rounded-3xl bg-white p-8 shadow-xl">
+          <div className="pop-in flex flex-col items-center gap-2 rounded-3xl bg-navy-800 p-8 shadow-xl">
             <span aria-hidden="true" className="star-pop text-7xl">
               {celebrating.emoji}
             </span>
-            <p className="text-xl font-extrabold text-slate-900">{celebrating.name}</p>
-            <p className="font-bold text-amber-600">Unlocked! 🎉</p>
+            <p className="text-xl font-extrabold text-slate-100">{celebrating.name}</p>
+            <p className="font-bold text-amber-400">Unlocked! 🎉</p>
           </div>
         </div>
       )}

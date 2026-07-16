@@ -22,7 +22,7 @@ export default function HowToPlay({ open, onClose }: Props) {
             <span aria-hidden="true" className="text-2xl leading-6">
               {emoji}
             </span>
-            <span className="text-sm font-semibold leading-snug text-slate-700">{tip}</span>
+            <span className="text-sm font-semibold leading-snug text-slate-300">{tip}</span>
           </li>
         ))}
       </ul>
@@ -30,7 +30,7 @@ export default function HowToPlay({ open, onClose }: Props) {
         type="button"
         autoFocus
         onClick={onClose}
-        className="w-full rounded-2xl bg-sky-500 py-3.5 text-lg font-extrabold text-white shadow transition hover:bg-sky-600 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-300"
+        className="w-full rounded-2xl bg-sky-400 py-3.5 text-lg font-extrabold text-navy-950 shadow transition hover:bg-sky-300 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
       >
         Let&apos;s Play! ▶
       </button>
