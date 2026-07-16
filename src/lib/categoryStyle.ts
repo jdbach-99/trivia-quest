@@ -9,27 +9,27 @@ const KNOWN: Record<string, CategoryStyle> = {
   "Hugo Books": {
     emoji: "📚",
     chip: "bg-amber-400/20 text-amber-300",
-    button: "border-amber-400/40 hover:border-amber-400 hover:bg-amber-400/10",
+    button: "border-amber-400/60 hover:border-amber-400 hover:bg-amber-400/10 shadow-[0_4px_0_0_rgba(251,191,36,0.35)]",
   },
   "Hugo Films": {
     emoji: "🎬",
     chip: "bg-violet-400/20 text-violet-300",
-    button: "border-violet-400/40 hover:border-violet-400 hover:bg-violet-400/10",
+    button: "border-violet-400/60 hover:border-violet-400 hover:bg-violet-400/10 shadow-[0_4px_0_0_rgba(167,139,250,0.35)]",
   },
   "Hugo Eats": {
     emoji: "🍜",
     chip: "bg-rose-400/20 text-rose-300",
-    button: "border-rose-400/40 hover:border-rose-400 hover:bg-rose-400/10",
+    button: "border-rose-400/60 hover:border-rose-400 hover:bg-rose-400/10 shadow-[0_4px_0_0_rgba(251,113,133,0.35)]",
   },
   "Hugo Plants": {
     emoji: "🌻",
     chip: "bg-emerald-400/20 text-emerald-300",
-    button: "border-emerald-400/40 hover:border-emerald-400 hover:bg-emerald-400/10",
+    button: "border-emerald-400/60 hover:border-emerald-400 hover:bg-emerald-400/10 shadow-[0_4px_0_0_rgba(52,211,153,0.35)]",
   },
   "Hugo Games": {
     emoji: "🎮",
     chip: "bg-sky-400/20 text-sky-300",
-    button: "border-sky-400/40 hover:border-sky-400 hover:bg-sky-400/10",
+    button: "border-sky-400/60 hover:border-sky-400 hover:bg-sky-400/10 shadow-[0_4px_0_0_rgba(56,189,248,0.35)]",
   },
 };
 
@@ -37,17 +37,17 @@ const FALLBACKS: CategoryStyle[] = [
   {
     emoji: "🧠",
     chip: "bg-cyan-400/20 text-cyan-300",
-    button: "border-cyan-400/40 hover:border-cyan-400 hover:bg-cyan-400/10",
+    button: "border-cyan-400/60 hover:border-cyan-400 hover:bg-cyan-400/10 shadow-[0_4px_0_0_rgba(34,211,238,0.35)]",
   },
   {
     emoji: "⭐",
     chip: "bg-orange-400/20 text-orange-300",
-    button: "border-orange-400/40 hover:border-orange-400 hover:bg-orange-400/10",
+    button: "border-orange-400/60 hover:border-orange-400 hover:bg-orange-400/10 shadow-[0_4px_0_0_rgba(251,146,60,0.35)]",
   },
   {
     emoji: "🔍",
     chip: "bg-lime-400/20 text-lime-300",
-    button: "border-lime-400/40 hover:border-lime-400 hover:bg-lime-400/10",
+    button: "border-lime-400/60 hover:border-lime-400 hover:bg-lime-400/10 shadow-[0_4px_0_0_rgba(163,230,53,0.35)]",
   },
 ];
 

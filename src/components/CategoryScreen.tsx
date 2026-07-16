@@ -35,7 +35,7 @@ export default function CategoryScreen({
         <button
           type="button"
           onClick={onPlayMixed}
-          className="flex w-full items-center gap-2.5 rounded-xl bg-sky-400 px-3 py-2.5 text-left shadow-md transition hover:bg-sky-300 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
+          className="flex w-full items-center gap-2.5 rounded-2xl bg-sky-400 px-3 py-2.5 text-left shadow-[0_4px_0_0_rgba(2,132,199,0.9)] transition hover:bg-sky-300 active:translate-y-[3px] active:shadow-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky-400/70"
         >
           <span aria-hidden="true" className="text-2xl">
             🎲
@@ -64,7 +64,7 @@ export default function CategoryScreen({
           return (
             <li
               key={category}
-              className={`rounded-xl border-2 bg-navy-800 px-3 py-2.5 shadow-sm ${style.button}`}
+              className={`rounded-2xl border-[3px] bg-navy-800 px-3 py-2.5 transition-transform active:translate-y-[2px] ${style.button}`}
             >
               <button
                 type="button"
